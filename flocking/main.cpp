@@ -112,7 +112,7 @@ int main()
 	sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "Flocking behaviour");
 	window.setFramerateLimit(60);
 
-	Flock flock(150);
+	Flock flock(300);
 
 	float shapeRadius = 5.0f;
 	sf::CircleShape boidShape(shapeRadius);
@@ -144,7 +144,7 @@ int main()
 			b.velocity = b.velocity + vec1 + vec2 + vec3;
 
 			// Limiting speed
-			float speedLimit = 2.0f;
+			float speedLimit = 5.0f;
 			if(magnitude(b.velocity) > speedLimit)
 				b.velocity = (b.velocity / magnitude(b.velocity)) * speedLimit;
 
