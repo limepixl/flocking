@@ -1,9 +1,10 @@
-#include <SFML/Graphics.hpp>
+﻿#include <SFML/Graphics.hpp>
 #include <vector>
+#include <cmath>
 
 float magnitude(sf::Vector2f& vec)
 {
-	return std::sqrt(std::pow(vec.x, 2) + std::pow(vec.y, 2));
+    return static_cast<float>(std::sqrt(std::pow(vec.x, 2) + std::pow(vec.y, 2)));
 }
 
 struct Boid
@@ -19,7 +20,7 @@ struct Boid
 
 	bool operator==(const Boid& rhs)
 	{
-		return (position == rhs.position && velocity == rhs.velocity && r == rhs.r);
+        return (position == rhs.position && velocity == rhs.velocity);
 	}
 
 	bool operator!=(const Boid& rhs)
@@ -31,9 +32,9 @@ struct Boid
 struct Flock
 {
 	std::vector<Boid> boids;
-	int numberOfBoids;
+    size_t numberOfBoids;
 
-	Flock(int n) : numberOfBoids(n)
+    Flock(size_t n) : numberOfBoids(n)
 	{
 		boids = std::vector<Boid>(n);
 	}
@@ -45,7 +46,7 @@ struct Flock
 		for(auto& b : boids)
 		{
 			sf::Vector2f pos = b.position;
-			float dist = std::sqrt(std::pow(pos.x - boid.position.x, 2) + std::pow(pos.y - boid.position.y, 2));
+            float dist = static_cast<float>(std::sqrt(std::pow(pos.x - boid.position.x, 2) + std::pow(pos.y - boid.position.y, 2)));
 
 			// If the boid being looked at is within radius of myself and is not myself
 			if(dist > 0 && dist <= boid.r * 2.0f)
@@ -89,7 +90,7 @@ struct Flock
 		for(auto& b : boids)
 		{
 			sf::Vector2f pos = b.position;
-			float dist = std::sqrt(std::pow(pos.x - boid.position.x, 2) + std::pow(pos.y - boid.position.y, 2));
+            float dist = static_cast<float>(std::sqrt(std::pow(pos.x - boid.position.x, 2) + std::pow(pos.y - boid.position.y, 2)));
 
 			// If the boid being looked at is within radius of myself and is not myself
 			if(dist > 0 && dist < boid.r)
